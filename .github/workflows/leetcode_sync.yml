@@ -1,0 +1,17 @@
+name: Sync LeetCode Submissions
+
+on:
+  workflow_dispatch: # Enables a manual trigger button in GitHub UI
+  schedule:
+    - cron: '0 8 * * *' # Automatically runs every day at 8:00 AM UTC
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch and Sync Submissions
+        uses: joshcai/leetcode-sync@v1.7
+        with:
+          github-token: ${{ github.token }}
+          leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
+          leetcode-session: ${{ secrets.LEETCODE_SESSION }}
